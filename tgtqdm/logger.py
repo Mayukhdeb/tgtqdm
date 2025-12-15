@@ -1,7 +1,7 @@
-import requests
-import time
-from functools import wraps
 import json
+import time
+import requests
+from functools import wraps
 
 def safe_telegram_call(func):
     @wraps(func)
