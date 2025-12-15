@@ -1,3 +1,5 @@
 __pycache__/
 *.json
 tgtqdm.egg-info/
+build/
+dist/
