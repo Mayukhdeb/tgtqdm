@@ -1,5 +1,9 @@
 # tgtqdm
 
+<p align="center">
+    <img src="images/banner.png" alt="tgtqdm banner" width="50%" />
+</p>
+
 who needs work-life balance when you can watch your logs on the phone?
 
 I made this because I wanted to watch my scripts go brr while I'm away from my computer
