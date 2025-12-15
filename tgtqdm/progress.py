@@ -1,4 +1,5 @@
 from .logger import TelegramLogger
+from typing import Optional, Iterable
 import time
 
 class tgtqdm:
@@ -12,7 +13,15 @@ class tgtqdm:
         # the progress bar will automatically update
     ```
     """
-    def __init__(self, iterable, json_filename: str = None, api_token: str=None, chat_id: int=None, desc: str = "", update_every_n_iters: int = 1):
+    def __init__(
+        self,
+        iterable: Iterable,
+        json_filename: Optional[str] = None,
+        api_token: Optional[str] = None,
+        chat_id: Optional[int] = None,
+        desc: str = "",
+        update_every_n_iters: int = 1
+    ):
         self.iterable = iterable
 
         if json_filename is None:
