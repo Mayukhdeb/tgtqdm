@@ -3,9 +3,41 @@ who needs work-life balance when you can watch your logs on the phone?
 
 I made this because I wanted to watch my scripts go brr while I'm away from my computer
 
-```
+```bash
 pip install git+https://github.com/Mayukhdeb/telegram-logger.git
 ```
+
+Replace your `tqdm` bar with this:
+
+```python
+import time
+from tgtqdm import tgtqdm
+
+for i in tgtqdm(
+    range(33),
+    json_filename="telegram_info.json",
+    desc="running something"
+):
+    ## do something
+    time.sleep(1)
+```
+
+
+The json file should look like this:
+```json
+{
+    "api_token": "TOKEN",
+    "chat_id": 123456789
+}
+```
+
+**How do I get an API token and a chat ID?**
+
+- For your own API token, go to [t.me/botfather](https://t.me/botfather) in telegram and create a new bot
+- For your chat id, go to [t.me/userinfobot](https://t.me/userinfobot) in telegram
+
+
+You can also manually log messages like this:
 
 ```python
 from telegram_logger import TelegramLogger
@@ -22,40 +54,6 @@ logger.log(message="Lettuce begin", timestamp=False)
 logger.log(message="Legume resume", timestamp=False)
 ```
 
-Or you can also replace your boring old `tqdm` bar with this:
-
-```python
-from telegram_logger import tgtqdm
-
-for i in tgtqdm(
-    range(33),
-    api_token="...",
-    chat_id=123,
-    desc="skidoodle",
-):
-    ## do something
-    pass
-```
-
-If you have a json file then you can also do it like this:
-
-
-```python
-for i in tgtqdm(
-    range(33),
-    json_filename="telegram_info.json",
-    desc="skadoodle",
-    update_every_n_iters = 10 ## log only every 10 steps
-):
-    ## do something
-    pass
-```
-
-## Getting your API token and chat ID
-
-- For your own API token, go to [t.me/botfather](https://t.me/botfather) in telegram and create a new bot
-- For your chat id, go to [t.me/userinfobot](https://t.me/userinfobot) in telegram
-
 Alternatively, you can also safely store your api token and chat ID in a json and initialize your logger from the filename. This is usually safer for dummies
 
 ```python
@@ -63,12 +61,3 @@ logger = TelegramLogger.from_json(
     filename="telegram_info.json"
 )
 ```
-
-The json file should look like this:
-```json
-{
-    "api_token": "TOKEN",
-    "chat_id": 123456789
-}
-```
-
