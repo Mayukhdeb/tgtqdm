@@ -2,15 +2,22 @@ import json
 import time
 import requests
 from functools import wraps
+import threading
 
 def safe_telegram_call(func):
     @wraps(func)
     def wrapper(*args, **kwargs):
-        try:
-            return func(*args, **kwargs)
-        except Exception as e:
-            print(f"[TelegramLogger ERROR in {func.__name__}]: {e}")
-            return None
+        def run():
+            try:
+                wrapper.result = func(*args, **kwargs)
+            except Exception as e:
+                print(f"[TelegramLogger ERROR in {func.__name__}]: {e}")
+                wrapper.result = None
+
+        thread = threading.Thread(target=run)
+        thread.start()
+        thread.join()
+        return getattr(wrapper, 'result', None)
     return wrapper
 
 """
